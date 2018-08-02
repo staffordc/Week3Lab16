@@ -24,23 +24,50 @@ What file do you want this from?");
             {
                 if (File.Exists(UserInput))
                 {
-                    //Menu for list/add/exit
-                    StreamReader CountriesFile = new StreamReader(UserInput);
                     while (true)
                     {
-                        //switch()
+                        Console.WriteLine("Which choice to use for menu? (numbos only please)");
+                        string UserInputMenu = Console.ReadLine();
+                        int UserIntPutMenu = int.Parse(UserInputMenu);
+                        switch (UserIntPutMenu)
                         {
 
-                           // case 1:
-                        string line = CountriesFile.ReadLine();
-                        if (line == null)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine(line);
-                        }
+                            case 1:
+                                using (StreamReader CountriesFile = new StreamReader(UserInput))
+                                {
+                                    
+                                    string line = CountriesFile.ReadToEnd();
+                                        Console.WriteLine(line);
+                                        break;
+                                    
+                                }
+                                
+                            case 2:
+                                using (StreamWriter CountriesFileWrite = new StreamWriter("Countries.txt",true))
+                                {
+                                    Console.WriteLine("What country? then we go to menu again");
+                                    string NewCountryInput = Console.ReadLine();
+                                    CountriesFileWrite.WriteLine(NewCountryInput);
+
+                                    break;
+                                }
+                            case 3:
+                                Console.WriteLine("want continue?");
+                                string continueFileCreate2 = Console.ReadLine();
+                                if (continueFileCreate2 == "Y")
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("no you");
+                                    Console.ReadKey();
+                                    return;
+                                }
+                            default:
+                                Console.WriteLine("No, you!");
+                                break;
+
                         }
                     }
                 }
@@ -52,8 +79,7 @@ What file do you want this from?");
                     {
                         using (StreamWriter CountriesFile = new StreamWriter("Countries.txt"))
                         {
-                            //wl
-                            //append:
+                            
                         }
                     }
                     else
