@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Week3Lab16CountryFiles
@@ -18,8 +19,25 @@ Welcome to the Countries Maintenence Applicaiton!
         2. Add a country
         3. Exit
 What file do you want this from?");
+            var IsCoolName = false;
+            string UserInput = null;
+            while (IsCoolName == false)
+            {
+                string UserInput = Console.ReadLine();
+                Match UserFileCreate = RegExHome.FileCreationRegEx.Match(UserInput);
+                IsCoolName = UserFileCreate.Success;
+                if (UserFileCreate.Success)
+                {
+                    Console.WriteLine("Cool file name!");
 
-            string UserInput = Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("That's no good");
+                    
+                }
+            }
+
             do
             {
                 if (File.Exists(UserInput))
@@ -88,11 +106,7 @@ What file do you want this from?");
                     }
                     UserInput = "Countries.txt";
                 }
-                Console.Read();
-
-                //Menu #3
-
-                Console.WriteLine("want continue?");
+                Console.WriteLine("you sure you want continue?");
                 string continueFileCreate = Console.ReadLine();
                 if (continueFileCreate == "Y")
                 {
